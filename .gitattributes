@@ -1,0 +1,2 @@
+# Mark MarkDown as a language to show in the GitHub repository language statistics bar
+*.md linguist-documentation=false linguist-detectable=true
