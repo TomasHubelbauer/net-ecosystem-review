@@ -21,7 +21,7 @@ jobs:
         # Generate the file
         curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/search/repositories?q=language:csharp+stars:>10000&sort=stars&order=desc > data.json
         # Add the changed file to Git stage and ditch extra files (caches, artifacts, …)
-        git add data.md
+        git add data.json
         git checkout -- .
         # Commit the changes to the Git repository to deploy GitHub Pages (if any)
         if git diff-index --quiet HEAD --; then
