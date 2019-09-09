@@ -19,7 +19,7 @@ jobs:
         # Check out the `master` branch because by default GitHub Actions checks out detached HEAD
         git checkout master
         # Generate the file
-        curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/search/repositories?q=language:csharp+stars:>10000&sort=stars&order=desc > data.json
+        curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/search/repositories?q=language:csharp+stars:>10000&sort=stars&order=desc -o data.json
         # Add the changed file to Git stage and ditch extra files (caches, artifacts, …)
         git add data.json
         git checkout -- .
