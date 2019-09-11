@@ -17,7 +17,7 @@ void async function () {
   }
 
   const name = new Date().toISOString().replace(/:/g, '-') + '.csv';
-  await fs.ensureDir('data');
-  await fs.writeFile('data/' + name, text);
-  await fs.appendFile('data/index.log', name + '\n');
+  await fs.ensureDir('docs/data');
+  await fs.writeFile('docs/data/' + name, text);
+  await fs.appendFile('docs/data/index.log', name + '\n');
 }()

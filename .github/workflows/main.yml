@@ -18,12 +18,6 @@ jobs:
         git config --global user.name "Tomas Hubelbauer"
         # Check out the `master` branch because by default GitHub Actions checks out detached HEAD
         git checkout master
-        # Generate the file
-        npm install
-        npm start ${{ secrets.GITHUB_TOKEN }}
-        # Add the changed file to Git stage and ditch extra files (caches, artifacts, …)
-        git add data
-        git checkout -- .
         # Build the CRA app
         cd cra
         npm install
@@ -31,6 +25,9 @@ jobs:
         cd ..
         rm -rf docs
         mv cra/build docs
+        # Generate the file
+        npm install
+        npm start ${{ secrets.GITHUB_TOKEN }}
         git add docs
         git checkout -- .
         # Commit the changes to the Git repository to deploy GitHub Pages (if any)

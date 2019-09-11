@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://tomashubelbauer.github.io/net-ecosystem-review",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",

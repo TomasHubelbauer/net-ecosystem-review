@@ -9,6 +9,11 @@ This repository collects a leaderboard of .NET repositories on GitHub with over
 
 Also check out my JavaScript and TypeScript ecosystem review repositories.
 
+Running:
+
+- `npx serve .` to serve `docs` through `proxy`
+- `cd cra` then `npm start` to start the app
+
 ## To-Do
 
 Set up GitHub Pages with leaderboards and deploy GitHub Pages from the workflow.
