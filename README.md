@@ -24,4 +24,13 @@ npm start
 
 ## To-Do
 
-Set up GitHub Pages with leaderboards and deploy GitHub Pages from the workflow.
+Replace the record viewer app with one where leaderboard is shown and progress
+in time displayed using change arrows (up and down arrow next to each item) with
+navigation arrows to the left and right of the leaderboard for switching the
+current record.
+
+Provide another view with a chart showing stars of each project on a line chart.
+
+Load notes for each item from README.md by parsing it and looking for headers
+which match the item name. This way I can keep the notes in prose but also have
+them show up in the web app.
