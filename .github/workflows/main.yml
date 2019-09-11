@@ -23,8 +23,10 @@ jobs:
         npm install
         npm run build
         cd ..
+        mv docs/data data
         rm -rf docs
         mv cra/build docs
+        mv data docs/data
         # Generate the file
         npm install
         npm start ${{ secrets.GITHUB_TOKEN }}
