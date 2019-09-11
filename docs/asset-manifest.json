@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.19393e92.chunk.css",
-    "main.js": "/static/js/main.f65535c8.chunk.js",
-    "main.js.map": "/static/js/main.f65535c8.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.f9ce0edb.js",
-    "runtime~main.js.map": "/static/js/runtime~main.f9ce0edb.js.map",
-    "static/js/2.e6a0ec16.chunk.js": "/static/js/2.e6a0ec16.chunk.js",
-    "static/js/2.e6a0ec16.chunk.js.map": "/static/js/2.e6a0ec16.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.2fda7e865b737a5bb2e72907b8d22e60.js": "/precache-manifest.2fda7e865b737a5bb2e72907b8d22e60.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.19393e92.chunk.css.map": "/static/css/main.19393e92.chunk.css.map",
-    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg"
+    "main.css": "/net-ecosystem-review/static/css/main.19393e92.chunk.css",
+    "main.js": "/net-ecosystem-review/static/js/main.02ce4bc8.chunk.js",
+    "main.js.map": "/net-ecosystem-review/static/js/main.02ce4bc8.chunk.js.map",
+    "runtime~main.js": "/net-ecosystem-review/static/js/runtime~main.225e3af9.js",
+    "runtime~main.js.map": "/net-ecosystem-review/static/js/runtime~main.225e3af9.js.map",
+    "static/js/2.e6a0ec16.chunk.js": "/net-ecosystem-review/static/js/2.e6a0ec16.chunk.js",
+    "static/js/2.e6a0ec16.chunk.js.map": "/net-ecosystem-review/static/js/2.e6a0ec16.chunk.js.map",
+    "index.html": "/net-ecosystem-review/index.html",
+    "precache-manifest.99827e590a366d20cba5d3a1fd96a5aa.js": "/net-ecosystem-review/precache-manifest.99827e590a366d20cba5d3a1fd96a5aa.js",
+    "service-worker.js": "/net-ecosystem-review/service-worker.js",
+    "static/css/main.19393e92.chunk.css.map": "/net-ecosystem-review/static/css/main.19393e92.chunk.css.map",
+    "static/media/logo.svg": "/net-ecosystem-review/static/media/logo.5d5d9eef.svg"
   }
 }
