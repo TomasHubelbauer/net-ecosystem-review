@@ -4,8 +4,8 @@ on:
     # Limit to the `master` branch
     - master
   schedule:
-    # Run daily
-    - cron:  '0 0* * *'
+    # Run daily at midnight
+    - cron:  '0 0 * * *'
 jobs:
   github-pages:
     runs-on: ubuntu-latest
@@ -23,6 +23,15 @@ jobs:
         npm start ${{ secrets.GITHUB_TOKEN }}
         # Add the changed file to Git stage and ditch extra files (caches, artifacts, …)
         git add data
+        git checkout -- .
+        # Build the CRA app
+        cd cra
+        npm install
+        npm run build
+        cd ..
+        rm -rf docs
+        mv cra/build docs
+        git add docs
         git checkout -- .
         # Commit the changes to the Git repository to deploy GitHub Pages (if any)
         if git diff-index --quiet HEAD --; then
