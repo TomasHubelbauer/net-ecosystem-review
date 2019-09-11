@@ -1,7 +1,10 @@
 # .NET Ecosystem Review
 
-https://github.com/search?l=CSharp&q=stars:>1000&s=stars&type=Repositories
+This repository collects a leaderboard of .NET repositories on GitHub with over
+1000 stars.
 
-- [ ] Add MarkDown `.gitattributes`
-- [ ] Crosslink with the other repo
-- [ ] Add some intro text
+Also check out my JavaScript and TypeScript ecosystem review repositories.
+
+## To-Do
+
+Set up GitHub Pages with leaderboards and deploy GitHub Pages from the workflow.
