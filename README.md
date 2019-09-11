@@ -9,10 +9,18 @@ This repository collects a leaderboard of .NET repositories on GitHub with over
 
 Also check out my JavaScript and TypeScript ecosystem review repositories.
 
-Running:
+## Running
 
-- `npx serve .` to serve `docs` through `proxy`
-- `cd cra` then `npm start` to start the app
+```sh
+# Serve the `data/` route handled by `proxy` in `package.json` of `cra`
+cd docs
+npx serve .
+```
+
+```sh
+cd cra
+npm start
+```
 
 ## To-Do
 
