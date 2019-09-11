@@ -22,7 +22,7 @@ jobs:
         mkdir -p data
         name=$(date -Iseconds | sed 's/:/-/g').json
         curl -o $name "https://api.github.com/search/repositories?q=language:csharp+stars:>1000&sort=stars&order=desc"
-        $name >> data/index.log
+        echo $name >> data/index.log
         # Add the changed file to Git stage and ditch extra files (caches, artifacts, …)
         git add data
         git checkout -- .
