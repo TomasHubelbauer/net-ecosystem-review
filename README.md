@@ -24,10 +24,12 @@ npm start
 
 ## To-Do
 
-Replace the record viewer app with one where leaderboard is shown and progress
-in time displayed using change arrows (up and down arrow next to each item) with
-navigation arrows to the left and right of the leaderboard for switching the
-current record.
+Add left and right arrows for switching to prev and next record.
+
+Use graphical icons instead of + and - signs.
+
+Remember the selected record in local storage and select it unless it was latest
+in which case default to latest.
 
 Provide another view with a chart showing stars of each project on a line chart.
 
@@ -39,3 +41,6 @@ Allow favoriting / watching items (probably only locally) to have them appear
 highlighted in the leaderboard and in the line chart.
 
 Display another chart which is not total but a change record-to-record.
+
+Calculate the gap to the next item with greater number of stars skipping the
+items with which the current one ties.

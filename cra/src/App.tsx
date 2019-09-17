@@ -1,87 +1,193 @@
 import './App.css';
 import React, { FC, useEffect, useState, ChangeEventHandler } from 'react';
 
+type Item = {
+  id: string;
+  name: string;
+  stars: number;
+};
+
+type Record =
+  | { state: 'ready'; fileName: string; }
+  | { state: 'loading'; fileName: string; }
+  | { state: 'success'; fileName: string; items: Item[]; }
+  | { state: 'error'; fileName: string; error: Error; }
+  ;
+
 const App: FC = () => {
-  const [records, setRecords] = useState<string[]>([]);
-  const [selectedRecord, setSelectedRecord] = useState<{ fileName: string; state: 'loading'; } | { fileName: string; state: 'success'; items: { id: string; name: string; stars: string; }[]; } | null>(null);
+  const [records, setRecords] = useState<Record[]>([]);
+  const [selectedRecordIndex, setSelectedRecordIndex] = useState<number | null>(null);
 
   useEffect(() => {
     void async function () {
       const response = await fetch('data/index.log');
       const text = await response.text();
-      const records = text.split('\n');
-
-      // Remove newline
-      records.pop();
+      const records: Record[] = text
+        .split('\n')
+        // Remove newline
+        .slice(0, -1)
+        .map(fileName => ({
+          state: 'ready',
+          fileName,
+        }));
 
       setRecords(records);
-      setSelectedRecord({ fileName: records[records.length - 1], state: 'loading' });
+      if (records.length > 0) {
+        setSelectedRecordIndex(records.length - 1);
+      }
     }()
   }, []);
 
   useEffect(() => {
-    if (selectedRecord === null) {
-      return;
-    }
+    async function loadRecord(recordIndex: number) {
+      const record = records[recordIndex];
 
-    if (selectedRecord.state === 'success') {
-      return;
-    }
+      // Prevent loading an error which is already loading, loaded or failed
+      if (record.state !== 'ready') {
+        return;
+      }
 
-    void async function () {
-      const response = await fetch('data/' + selectedRecord.fileName);
+      // Mark the record as loading
+      setRecords(records.map((record, index) => index === recordIndex ? ({ state: 'loading', fileName: record.fileName }) : record));
+
+      const response = await fetch('data/' + record.fileName);
       const text = await response.text();
-      const items = text
+      const items: Item[] = text
         .split('\n')
         // Remove headers & newline
         .slice(1, -1)
         .map(item => {
           const [id, name, stars] = item.split(';');
-          return { id, name, stars }
+          return { id, name, stars: Number(stars) }
         });
 
-      setSelectedRecord({ fileName: selectedRecord.fileName, state: 'success', items });
-    }()
-  }, [selectedRecord]);
+      const _records = records.map((record, index) => {
+        if (index === recordIndex) {
+          return {
+            state: 'success' as const,
+            fileName: record.fileName,
+            items,
+          };
+        }
+
+        return record;
+      });
+
+      setRecords(_records);
+    }
+
+    if (selectedRecordIndex === null) {
+      return;
+    }
+
+    // Load the prev record for comparison
+    if (selectedRecordIndex > 0) {
+      loadRecord(selectedRecordIndex - 1);
+    }
+
+    // Load the selected record
+    loadRecord(selectedRecordIndex);
+
+    // Load the next record for comparison
+    if (selectedRecordIndex < records.length - 1) {
+      loadRecord(selectedRecordIndex + 1);
+    }
+  }, [selectedRecordIndex, records]);
 
   const handleRecordSelectChange: ChangeEventHandler<HTMLSelectElement> = event => {
-    setSelectedRecord({ fileName: event.currentTarget.value, state: 'loading' })
+    setSelectedRecordIndex(Number(event.currentTarget.value));
   };
+
+  function renderRelatedRecord(record: Record, item: Item, sign: '+' | '-') {
+    if (record.state === 'ready' || record.state === 'loading') {
+      return 'Loading…';
+    }
+
+    if (record.state === 'error') {
+      return 'Error!';
+    }
+
+    const index = record.items.findIndex(i => i.id === item.id);
+    const comparedItem = record.items[index];
+    if (!comparedItem) {
+      return 'No match';
+    }
+
+    switch (sign) {
+      case '+': {
+        if (item.stars >= comparedItem.stars) {
+          return `+${item.stars - comparedItem.stars} (from ${comparedItem.stars})`;
+        } else {
+          return `-${item.stars - comparedItem.stars} (from ${comparedItem.stars})`;
+        }
+      }
+      case '-': {
+        if (item.stars >= comparedItem.stars) {
+          return `+${comparedItem.stars - item.stars} (from ${comparedItem.stars})`;
+        } else {
+          return `-${comparedItem.stars - item.stars} (from ${comparedItem.stars})`;
+        }
+      }
+    }
+  }
+
+  function renderSelectedRecord() {
+    if (!selectedRecordIndex) {
+      return 'No record is selected';
+    }
+
+    const selectedRecord = records[selectedRecordIndex];
+    if (selectedRecord.state === 'ready') {
+      return 'Selected ' + selectedRecord.fileName;
+    }
+
+    if (selectedRecord.state === 'loading') {
+      return 'Loading ' + selectedRecord.fileName + '…';
+    }
+
+    if (selectedRecord.state === 'error') {
+      return selectedRecord.error.message;
+    }
+
+    const prevRecord = selectedRecordIndex > 0 ? records[selectedRecordIndex - 1] : null;
+    const nextRecord = selectedRecordIndex < records.length - 1 ? records[selectedRecordIndex + 1] : null;
+    return (
+      <table>
+        <caption>{selectedRecord.fileName}</caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Stars</th>
+            <th>Gap</th>
+            {prevRecord && <th>Change from<br />{prevRecord.fileName}</th>}
+            {nextRecord && <th>Change from<br />{nextRecord.fileName}</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {selectedRecord.items.map((item, index) => (
+            <tr key={item.id}>
+              <td>{index + 1}</td>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.stars}</td>
+              <td>{index === 0 ? '' : (selectedRecord.items[index - 1].stars - item.stars)}</td>
+              {prevRecord && <td>{renderRelatedRecord(prevRecord, item, '+')}</td>}
+              {nextRecord && <td>{renderRelatedRecord(nextRecord, item, '-')}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
 
   return (
     <div>
-      <select onChange={handleRecordSelectChange}>
-        {records.map(record => <option key={record}>{record}</option>)}
+      <select onChange={handleRecordSelectChange} value={selectedRecordIndex || undefined}>
+        {records.map((record, index) => <option key={record.fileName} value={index}>{record.fileName}</option>)}
       </select>
-      <br />
-      {selectedRecord
-        ? (selectedRecord.state === 'loading'
-          ? 'Loading record…'
-          : (
-            <table>
-              <caption>{selectedRecord.fileName}</caption>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Stars</th>
-                </tr>
-              </thead>
-              <tbody>
-                {selectedRecord.items.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index + 1}</td>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>{item.stars}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )
-        )
-        : 'No record is selected.'}
+      {renderSelectedRecord()}
     </div>
   );
 }
