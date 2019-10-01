@@ -31,6 +31,9 @@ Use graphical icons instead of + and - signs.
 Remember the selected record in local storage and select it unless it was latest
 in which case default to latest.
 
+Add a search bar for filtering down the results inline.
+Fit a row between the matches which says how many non-matches are in-between them.
+
 Provide another view with a chart showing stars of each project on a line chart.
 
 Load notes for each item from README.md by parsing it and looking for headers
