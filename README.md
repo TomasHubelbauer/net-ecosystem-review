@@ -2,7 +2,7 @@
 
 [**LIVE**](https://tomashubelbauer.github.io/net-ecosystem-review)
 
-![](https://github.com/tomashubelbauer/net-ecosystem-review/workflows/github-pages/badge.svg)
+![](https://github.com/tomashubelbauer/net-ecosystem-review/workflows/.github/workflows/main.yml/badge.svg)
 
 This repository collects a leaderboard of .NET repositories on GitHub with over
 1000 stars.
