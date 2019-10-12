@@ -52,43 +52,46 @@ const App: FC = () => {
       // Mark the record as loading
       setRecords(records.map((record, index) => index === recordIndex ? ({ state: 'loading', fileName: record.fileName }) : record));
 
-      const response = await fetch('data/' + record.fileName);
-      const text = await response.text();
-      const items: Item[] = text
-        .split('\n')
-        // Remove headers & newline
-        .slice(1, -1)
-        .map(item => {
-          const [id, name, stars] = item.split(';');
-          return { id, name, stars: Number(stars) }
-        });
-
-      const _records = records.map((record, index) => {
-        if (index === recordIndex) {
-          return {
-            state: 'success' as const,
-            fileName: record.fileName,
-            items,
-          };
+      let _record: Record;
+      try {
+        const response = await fetch('data/' + record.fileName);
+        const text = await response.text();
+        const items: Item[] = text
+          .split('\n')
+          // Remove headers & newline
+          .slice(1, -1)
+          .map(item => {
+            const [id, name, stars] = item.split(';');
+            return { id, name, stars: Number(stars) }
+          });
+        _record = {
+          state: 'success',
+          fileName: record.fileName,
+          items,
+        };
+      } catch (error) {
+        _record = {
+          state: 'error',
+          fileName: record.fileName,
+          error
         }
+      }
 
-        return record;
-      });
-
-      setRecords(_records);
+      // Mark the record as either loaded or errored
+      setRecords(records.map((record, index) => (index === recordIndex) ? _record : record));
     }
 
     if (selectedRecordIndex === null) {
       return;
     }
 
+    // Load the selected record
+    loadRecord(selectedRecordIndex);
+
     // Load the prev record for comparison
     if (selectedRecordIndex > 0) {
       loadRecord(selectedRecordIndex - 1);
     }
-
-    // Load the selected record
-    loadRecord(selectedRecordIndex);
 
     // Load the next record for comparison
     if (selectedRecordIndex < records.length - 1) {
