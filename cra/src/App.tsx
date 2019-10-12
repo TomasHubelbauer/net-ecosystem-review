@@ -14,6 +14,7 @@ type Record =
   | { state: 'error'; fileName: string; error: Error; }
   ;
 
+const suffixLength = '.###Z.csv'.length;
 const App: FC = () => {
   const [records, setRecords] = useState<Record[]>([]);
   const [selectedRecordIndex, setSelectedRecordIndex] = useState<number | null>(null);
@@ -176,7 +177,7 @@ const App: FC = () => {
     return (
       <table>
         <caption>
-          {selectedRecord.fileName}
+          {selectedRecord.fileName.slice(0, -suffixLength)}
           <input id="filterInput" value={filter} onChange={handleFilterInputChange} />
         </caption>
         <thead>
@@ -187,8 +188,8 @@ const App: FC = () => {
             <th>Name</th>
             <th>Stars</th>
             <th>Gap</th>
-            {prevRecord && <th>Change from<br />{prevRecord.fileName}</th>}
-            {nextRecord && <th>Change from<br />{nextRecord.fileName}</th>}
+            {prevRecord && <th>{prevRecord.fileName.slice(0, -suffixLength)}</th>}
+            {nextRecord && <th>{nextRecord.fileName.slice(0, -suffixLength)}</th>}
           </tr>
         </thead>
         <tbody>
@@ -235,7 +236,7 @@ const App: FC = () => {
   return (
     <div>
       <select onChange={handleRecordSelectChange} value={selectedRecordIndex || undefined}>
-        {records.map((record, index) => <option key={record.fileName} value={index}>{record.fileName}</option>)}
+        {records.map((record, index) => <option key={record.fileName} value={index}>{record.fileName.slice(0, -suffixLength)}</option>)}
       </select>
       {renderSelectedRecord()}
     </div>

@@ -6,6 +6,15 @@ tr.★ {
   background: yellow;
 }
 
+th {
+  padding: 0 1ex;
+  text-align: start;
+}
+
+td {
+  padding: 0 1ex;
+}
+
 #filterInput {
   display: block;
   margin: auto;
