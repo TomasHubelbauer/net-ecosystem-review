@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.css","App.css"],"names":[],"mappings":"AAAA,KACE,2BACF,CCFA,OACE,aACF","file":"main.5fd06efb.chunk.css","sourcesContent":["body {\n  font: normal 10pt sans-serif;\n}\n","select {\r\n  display: block;\r\n}\r\n"]}
