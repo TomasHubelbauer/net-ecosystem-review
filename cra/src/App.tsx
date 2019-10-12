@@ -176,7 +176,7 @@ const App: FC = () => {
                 <a href={'#' + item.name}>{item.name}</a>
               </td>
               <td>{item.stars}</td>
-              <td>{index === 0 ? '' : (selectedRecord.items[index - 1].stars - item.stars)}</td>
+              <td>{renderGap(selectedRecord.items, index)}</td>
               {prevRecord && <td>{renderRelatedRecord(prevRecord, item, '+')}</td>}
               {nextRecord && <td>{renderRelatedRecord(nextRecord, item, '-')}</td>}
             </tr>
@@ -184,6 +184,21 @@ const App: FC = () => {
         </tbody>
       </table>
     );
+  }
+
+  function renderGap(items: Item[], index: number) {
+    if (index === 0) {
+      return null;
+    }
+
+    const currentItem = items[index];
+    let comparedItem: Item | undefined;
+    do {
+      index--;
+      comparedItem = items[index];
+    } while (index > 0 && (comparedItem === undefined || comparedItem.stars === currentItem.stars));
+
+    return comparedItem.stars - currentItem.stars;
   }
 
   return (

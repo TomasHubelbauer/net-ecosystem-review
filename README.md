@@ -44,6 +44,3 @@ Allow favoriting / watching items (probably only locally) to have them appear
 highlighted in the leaderboard and in the line chart.
 
 Display another chart which is not total but a change record-to-record.
-
-Calculate the gap to the next item with greater number of stars skipping the
-items with which the current one ties.
