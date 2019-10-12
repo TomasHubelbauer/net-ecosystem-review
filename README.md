@@ -47,7 +47,3 @@ Display another chart which is not total but a change record-to-record.
 
 Calculate the gap to the next item with greater number of stars skipping the
 items with which the current one ties.
-
-Make the position numbers and names clickable - position number anchors to
-that position whatever repo is actually at it and repo name anchors to that
-repo whatever position it is actually at.

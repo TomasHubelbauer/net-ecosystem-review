@@ -168,9 +168,13 @@ const App: FC = () => {
         <tbody>
           {selectedRecord.items.map((item, index) => (
             <tr key={item.id}>
-              <td>{index + 1}</td>
+              <td id={String(index + 1)}>
+                <a href={'#' + String(index + 1)}>{index + 1}</a>
+              </td>
               <td>{item.id}</td>
-              <td>{item.name}</td>
+              <td id={item.name}>
+                <a href={'#' + item.name}>{item.name}</a>
+              </td>
               <td>{item.stars}</td>
               <td>{index === 0 ? '' : (selectedRecord.items[index - 1].stars - item.stars)}</td>
               {prevRecord && <td>{renderRelatedRecord(prevRecord, item, '+')}</td>}
