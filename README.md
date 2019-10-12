@@ -40,7 +40,4 @@ Load notes for each item from README.md by parsing it and looking for headers
 which match the item name. This way I can keep the notes in prose but also have
 them show up in the web app.
 
-Allow favoriting / watching items (probably only locally) to have them appear
-highlighted in the leaderboard and in the line chart.
-
 Display another chart which is not total but a change record-to-record.

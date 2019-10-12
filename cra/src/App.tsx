@@ -1,5 +1,5 @@
 import './App.css';
-import React, { FC, useEffect, useState, ChangeEventHandler } from 'react';
+import React, { FC, useEffect, useState, ChangeEventHandler, MouseEventHandler } from 'react';
 
 type Item = {
   id: string;
@@ -98,6 +98,23 @@ const App: FC = () => {
     setSelectedRecordIndex(Number(event.currentTarget.value));
   };
 
+  const [forceUpdateNonce, setForceUpdateNonce] = useState();
+  const handleToggleButtonClick: MouseEventHandler<HTMLButtonElement> = event => {
+    const { id, name } = event.currentTarget.dataset;
+    if (id === undefined || name === undefined) {
+      throw new Error('ID and name must be passed!');
+    }
+
+    if (localStorage.getItem(id)) {
+      localStorage.removeItem(id);
+    } else {
+      localStorage.setItem(id, name);
+    }
+
+    void forceUpdateNonce;
+    setForceUpdateNonce(Date.now);
+  };
+
   function renderRelatedRecord(record: Record, item: Item, sign: '+' | '-') {
     if (record.state === 'ready' || record.state === 'loading') {
       return 'Loading…';
@@ -156,6 +173,7 @@ const App: FC = () => {
         <caption>{selectedRecord.fileName}</caption>
         <thead>
           <tr>
+            <th></th>
             <th>#</th>
             <th>ID</th>
             <th>Name</th>
@@ -167,7 +185,12 @@ const App: FC = () => {
         </thead>
         <tbody>
           {selectedRecord.items.map((item, index) => (
-            <tr key={item.id}>
+            <tr key={item.id} className={localStorage.getItem(item.id) ? '★' : '☆'}>
+              <td>
+                <button data-id={item.id} data-name={item.name} onClick={handleToggleButtonClick}>
+                  {localStorage.getItem(item.id) ? '★' : '☆'}
+                </button>
+              </td>
               <td id={String(index + 1)}>
                 <a href={'#' + String(index + 1)}>{index + 1}</a>
               </td>
