@@ -121,7 +121,7 @@ const App: FC = () => {
     setFilter(event.currentTarget.value);
   };
 
-  function renderRelatedRecord(record: Record, item: Item, sign: '+' | '-') {
+  function renderRelatedRecord(record: Record, item: Item, flipSign: boolean) {
     if (record.state === 'ready' || record.state === 'loading') {
       return 'Loading…';
     }
@@ -136,22 +136,15 @@ const App: FC = () => {
       return 'No match';
     }
 
-    switch (sign) {
-      case '+': {
-        if (item.stars >= comparedItem.stars) {
-          return `+${item.stars - comparedItem.stars} (from ${comparedItem.stars})`;
-        } else {
-          return `-${item.stars - comparedItem.stars} (from ${comparedItem.stars})`;
-        }
-      }
-      case '-': {
-        if (item.stars >= comparedItem.stars) {
-          return `+${comparedItem.stars - item.stars} (from ${comparedItem.stars})`;
-        } else {
-          return `-${comparedItem.stars - item.stars} (from ${comparedItem.stars})`;
-        }
-      }
-    }
+    const change = item.stars - comparedItem.stars;
+    const difference = Math.abs(change);
+    const sign = Math.sign(change) > 0;
+    return (
+      <>
+        <code>{(sign || flipSign) ? '+' : '-'}</code>
+        {difference} ({comparedItem.stars})
+      </>
+    );
   }
 
   function renderSelectedRecord() {
@@ -209,8 +202,8 @@ const App: FC = () => {
               </td>
               <td>{item.stars}</td>
               <td>{renderGap(selectedRecord.items, index)}</td>
-              {prevRecord && <td>{renderRelatedRecord(prevRecord, item, '+')}</td>}
-              {nextRecord && <td>{renderRelatedRecord(nextRecord, item, '-')}</td>}
+              {prevRecord && <td>{renderRelatedRecord(prevRecord, item, true)}</td>}
+              {nextRecord && <td>{renderRelatedRecord(nextRecord, item, false)}</td>}
             </tr>
           ))}
         </tbody>

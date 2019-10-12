@@ -26,8 +26,6 @@ npm start
 
 Add left and right arrows for switching to prev and next record.
 
-Use graphical icons instead of + and - signs.
-
 Provide another view with a chart showing stars of each project on a line chart.
 
 Load notes for each item from README.md by parsing it and looking for headers
