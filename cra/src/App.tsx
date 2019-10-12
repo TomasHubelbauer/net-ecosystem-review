@@ -17,6 +17,7 @@ type Record =
 const App: FC = () => {
   const [records, setRecords] = useState<Record[]>([]);
   const [selectedRecordIndex, setSelectedRecordIndex] = useState<number | null>(null);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     void async function () {
@@ -115,6 +116,10 @@ const App: FC = () => {
     setForceUpdateNonce(Date.now);
   };
 
+  const handleFilterInputChange: ChangeEventHandler<HTMLInputElement> = event => {
+    setFilter(event.currentTarget.value);
+  };
+
   function renderRelatedRecord(record: Record, item: Item, sign: '+' | '-') {
     if (record.state === 'ready' || record.state === 'loading') {
       return 'Loading…';
@@ -170,7 +175,10 @@ const App: FC = () => {
     const nextRecord = selectedRecordIndex < records.length - 1 ? records[selectedRecordIndex + 1] : null;
     return (
       <table>
-        <caption>{selectedRecord.fileName}</caption>
+        <caption>
+          {selectedRecord.fileName}
+          <input id="filterInput" value={filter} onChange={handleFilterInputChange} />
+        </caption>
         <thead>
           <tr>
             <th></th>
@@ -184,7 +192,7 @@ const App: FC = () => {
           </tr>
         </thead>
         <tbody>
-          {selectedRecord.items.map((item, index) => (
+          {selectedRecord.items.map((item, index) => item.name.toUpperCase().includes(filter.toUpperCase()) && (
             <tr key={item.id} className={localStorage.getItem(item.id) ? '★' : '☆'}>
               <td>
                 <button data-id={item.id} data-name={item.name} onClick={handleToggleButtonClick}>

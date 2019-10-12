@@ -5,3 +5,8 @@ select {
 tr.★ {
   background: yellow;
 }
+
+#filterInput {
+  display: block;
+  margin: auto;
+}
