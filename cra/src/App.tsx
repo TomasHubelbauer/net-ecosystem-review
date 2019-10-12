@@ -124,6 +124,22 @@ const App: FC = () => {
     setFilter(event.currentTarget.value);
   };
 
+  const handlePrevButtonClick: MouseEventHandler = event => {
+    if (selectedRecordIndex === null) {
+      return;
+    }
+
+    setSelectedRecordIndex(selectedRecordIndex > 0 ? selectedRecordIndex - 1 : records.length - 1);
+  };
+
+  const handleNextButtonClick: MouseEventHandler = event => {
+    if (selectedRecordIndex === null) {
+      return;
+    }
+
+    setSelectedRecordIndex(selectedRecordIndex < records.length - 1 ? selectedRecordIndex + 1 : 0);
+  };
+
   function renderRelatedRecord(record: Record, item: Item, flipSign: boolean) {
     if (record.state === 'ready' || record.state === 'loading') {
       return 'Loading…';
@@ -151,7 +167,7 @@ const App: FC = () => {
   }
 
   function renderSelectedRecord() {
-    if (!selectedRecordIndex) {
+    if (selectedRecordIndex === null) {
       return 'No record is selected';
     }
 
@@ -172,10 +188,6 @@ const App: FC = () => {
     const nextRecord = selectedRecordIndex < records.length - 1 ? records[selectedRecordIndex + 1] : null;
     return (
       <table>
-        <caption>
-          {selectedRecord.fileName.slice(0, -suffixLength)}
-          <input id="filterInput" value={filter} onChange={handleFilterInputChange} />
-        </caption>
         <thead>
           <tr>
             <th></th>
@@ -231,9 +243,12 @@ const App: FC = () => {
 
   return (
     <div>
+      <button onClick={handlePrevButtonClick}>←</button>
       <select onChange={handleRecordSelectChange} value={selectedRecordIndex || undefined}>
         {records.map((record, index) => <option key={record.fileName} value={index}>{record.fileName.slice(0, -suffixLength)}</option>)}
       </select>
+      <button onClick={handleNextButtonClick}>→</button>
+      <input placeholder="🔍" value={filter} onChange={handleFilterInputChange} />
       {renderSelectedRecord()}
     </div>
   );
