@@ -7,7 +7,11 @@
 This repository collects a leaderboard of .NET repositories on GitHub with over
 1000 stars.
 
-Also check out my JavaScript and TypeScript ecosystem review repositories.
+Also check out my other ecosystem reviews:
+
+- [JavaScript ecosystem review](https://github.com/TomasHubelbauer/js-ecosystem-review)
+- [TypeScript ecosystem review](https://github.com/TomasHubelbauer/ts-ecosystem-review)
+- [Node ecosystem review](https://github.com/TomasHubelbauer/npm-ecosystem-review)
 
 ## Running
 
