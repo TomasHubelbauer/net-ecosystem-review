@@ -249,6 +249,8 @@ const App: FC = () => {
       </select>
       <button onClick={handleNextButtonClick}>→</button>
       <input placeholder="🔍" value={filter} onChange={handleFilterInputChange} />
+      Copyright &copy; <a href="https://hubelbauer.net">Tomas Hubelbauer</a> 2019.
+      <a href="https://github.com/TomasHubelbauer/net-ecosystem-review">GitHub</a>
       {renderSelectedRecord()}
     </div>
   );
