@@ -28,10 +28,11 @@ npm start
 
 ## To-Do
 
-Provide another view with a chart showing stars of each project on a line chart.
+### Provide another view with a chart showing stars of each project on a line chart
 
-Load notes for each item from README.md by parsing it and looking for headers
-which match the item name. This way I can keep the notes in prose but also have
-them show up in the web app.
+### Load notes for each item from README.md
 
-Display another chart which is not total but a change record-to-record.
+Parse it and look for headers which match the item name. This way I can keep the
+notes in prose but also have them show up in the web app.
+
+### Display another chart which is not total but a change record-to-record
