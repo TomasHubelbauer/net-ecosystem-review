@@ -36,8 +36,3 @@ Parse it and look for headers which match the item name. This way I can keep the
 notes in prose but also have them show up in the web app.
 
 ### Display another chart which is not total but a change record-to-record
-
-### Make name links GitHub links
-
-Display an anchor icon on hover for the # link for both the name and the number
-instead.
