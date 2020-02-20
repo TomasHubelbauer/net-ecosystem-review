@@ -12,7 +12,7 @@ void async function () {
     const data = await response.json();
     links = link(response.headers.get('link'));
     for (const item of data.items) {
-      text += `${item.id};${item.full_name};${item.stargazers_count}\n`;
+      text += `${item.id};${item.full_name};${item.stargazers_count};${item.html_url}\n`;
     }
   }
 
