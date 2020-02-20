@@ -47,3 +47,12 @@ render the `a` after removing data files which lack the links.
 ### Switch to commas only as a separator and delete the semicolon fallback
 
 This will make the CSVs previewable in GitHub.
+
+### Make permalink URL fragments work in all browsers
+
+Some browsers won't scroll to the position of the URL fragment presumably
+because the data are loaded asynchronously. Maybe this is fixable by either
+straight up resetting the fragment to itself if there was one after the
+load or by resetting it to a blank string and back to the original value.
+Then the browser should have no trouble navigating to it since the DOM
+element will already exist.
