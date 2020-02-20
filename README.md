@@ -43,3 +43,7 @@ notes in prose but also have them show up in the web app.
 
 Right now the UI checks if the links is present - instead assume it is and just
 render the `a` after removing data files which lack the links.
+
+### Switch to commas only as a separator and delete the semicolon fallback
+
+This will make the CSVs previewable in GitHub.
