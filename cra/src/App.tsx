@@ -4,6 +4,7 @@ import React, { FC, useEffect, useState, ChangeEventHandler, MouseEventHandler }
 type Item = {
   id: string;
   name: string;
+  link: string;
   stars: number;
 };
 
@@ -61,8 +62,8 @@ const App: FC = () => {
           // Remove headers & newline
           .slice(1, -1)
           .map(item => {
-            const [id, name, stars] = item.split(';');
-            return { id, name, stars: Number(stars) }
+            const [id, name, stars, link] = item.split(';');
+            return { id, name, stars: Number(stars), link }
           });
         _record = {
           state: 'success',
@@ -213,7 +214,9 @@ const App: FC = () => {
               </td>
               <td>{item.id}</td>
               <td id={item.name}>
-                <a href={'#' + item.name}>{item.name}</a>
+                <a href={'#' + item.name}>#</a>
+                {' '}
+                {item.link ? <a href={item.link}>{item.name}</a> : item.name}
               </td>
               <td>{item.stars}</td>
               <td>{renderGap(selectedRecord.items, index)}</td>
