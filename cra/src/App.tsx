@@ -62,7 +62,7 @@ const App: FC = () => {
           // Remove headers & newline
           .slice(1, -1)
           .map(item => {
-            const [id, name, stars, link] = item.split(';');
+            const [id, name, stars, link] = item.includes(';') ? item.split(';') : item.split(',');
             return { id, name, stars: Number(stars), link }
           });
         _record = {
