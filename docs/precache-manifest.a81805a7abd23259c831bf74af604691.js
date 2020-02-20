@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8e1f664e3c0ba955f2e6535360b52f0c",
+    "revision": "d5c0d7e1c9158055597c09417e9e20c4",
     "url": "/net-ecosystem-review/index.html"
   },
   {
-    "revision": "e2c760f8b7195a163adf",
+    "revision": "ed585b161475882d431a",
     "url": "/net-ecosystem-review/static/css/main.52745490.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/net-ecosystem-review/static/js/2.449b3691.chunk.js"
   },
   {
-    "revision": "e2c760f8b7195a163adf",
-    "url": "/net-ecosystem-review/static/js/main.6f47cdad.chunk.js"
+    "revision": "ed585b161475882d431a",
+    "url": "/net-ecosystem-review/static/js/main.f3005bc6.chunk.js"
   },
   {
     "revision": "9b64256720c9362f178b",
