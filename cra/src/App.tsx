@@ -210,7 +210,7 @@ const App: FC = () => {
                 </button>
               </td>
               <td id={String(index + 1)}>
-                <a href={'#' + String(index + 1)}>{index + 1}</a>
+                <a href={'#' + String(index + 1)}>#{index + 1}</a>
               </td>
               <td>{item.id}</td>
               <td id={item.name}>
