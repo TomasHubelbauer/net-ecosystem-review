@@ -38,3 +38,8 @@ notes in prose but also have them show up in the web app.
 ### Display another chart which is not total but a change record-to-record
 
 ### Fix clearing the search field not resetting the results back
+
+### Delete old data and make the item link mandatory in the CSV afterwards
+
+Right now the UI checks if the links is present - instead assume it is and just
+render the `a` after removing data files which lack the links.
