@@ -36,3 +36,5 @@ Parse it and look for headers which match the item name. This way I can keep the
 notes in prose but also have them show up in the web app.
 
 ### Display another chart which is not total but a change record-to-record
+
+### Fix clearing the search field not resetting the results back
