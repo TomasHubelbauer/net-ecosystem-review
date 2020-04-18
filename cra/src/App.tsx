@@ -98,6 +98,9 @@ const App: FC = () => {
     if (selectedRecordIndex < records.length - 1) {
       loadRecord(selectedRecordIndex + 1);
     }
+    
+    // Reset hash after the records have rendered to cause jump to anchor
+    location.hash = location.hash;
   }, [selectedRecordIndex, records]);
 
   const handleRecordSelectChange: ChangeEventHandler<HTMLSelectElement> = event => {
