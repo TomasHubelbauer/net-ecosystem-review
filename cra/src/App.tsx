@@ -100,7 +100,8 @@ const App: FC = () => {
     }
     
     // Reset hash after the records have rendered to cause jump to anchor
-    window.location.hash = window.location.hash;
+    const fragment = window.location.hash;
+    window.location.hash = fragment;
   }, [selectedRecordIndex, records]);
 
   const handleRecordSelectChange: ChangeEventHandler<HTMLSelectElement> = event => {
