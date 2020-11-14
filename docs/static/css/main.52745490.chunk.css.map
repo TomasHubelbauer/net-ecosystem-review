@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.css","App.css"],"names":[],"mappings":"AAAA,KACE,2BACF,CCFA,KACE,eACF,CAEA,GAEE,gBACF,CAEA,MAJE,aAMF","file":"main.52745490.chunk.css","sourcesContent":["body {\n  font: normal 10pt sans-serif;\n}\n","tr.★ {\r\n  background: yellow;\r\n}\r\n\r\nth {\r\n  padding: 0 1ex;\r\n  text-align: start;\r\n}\r\n\r\ntd {\r\n  padding: 0 1ex;\r\n}\r\n"]}
