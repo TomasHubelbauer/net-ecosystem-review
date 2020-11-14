@@ -1,3 +1,9 @@
+thead {
+  background: white;
+  position: sticky;
+  top: 0;
+}
+
 tr.★ {
   background: yellow;
 }
